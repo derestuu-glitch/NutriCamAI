@@ -291,7 +291,7 @@
         <div class="lg:col-span-6 space-y-6">
           <div class="reveal-el reveal-fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Powered by Gemini 3.8 Flash Proxy • Secure Cloud</span>
+            <span>Powered by Gemini 2.5 Flash • Ultra-Fast Vision</span>
           </div>
 
           <h1 class="reveal-el reveal-fade-up delay-100 font-extrabold text-3xl sm:text-5xl text-white leading-[1.15] tracking-tight">
@@ -418,7 +418,7 @@
             <span class="stat-counter" data-target="3" data-suffix=" Detik">0 Detik</span>
           </p>
           <p class="text-xs sm:text-sm font-bold text-white mt-1">Kecepatan Analisis AI</p>
-          <p class="text-[11px] text-slate-400 mt-0.5">Proxy aman Vercel ke Gemini 3.8 Flash</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Proxy aman Vercel ke Gemini 2.5 Flash</p>
         </div>
 
         <div class="reveal-el reveal-fade-up delay-340 p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
@@ -862,7 +862,6 @@
       <!-- ================================================================= -->
       <section id="page-home" class="space-y-5 animate-enter">
         
-        <!-- Header Sapaan & Status Komposisi Tubuh -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <p id="home-today-date" class="text-xs font-semibold text-slate-500">Senin, 16 November 2026</p>
@@ -874,10 +873,8 @@
           </button>
         </div>
 
-        <!-- Hero Card: Cincin Kalori & Makro Harian (Biophilic Spatial Dark Card) -->
         <div class="rounded-3xl bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-950 text-white p-5 sm:p-7 border border-emerald-500/30 shadow-2xl space-y-5">
           <div class="flex flex-col md:flex-row items-center gap-6">
-            <!-- Radial Progress Ring Kalori -->
             <div class="relative w-40 h-40 shrink-0 flex items-center justify-center">
               <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
                 <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="11" />
@@ -890,7 +887,6 @@
               </div>
             </div>
 
-            <!-- Rincian Energi & 3 Progress Bar Makro -->
             <div class="flex-1 w-full space-y-4">
               <div class="grid grid-cols-3 gap-2.5 text-center">
                 <div class="p-2.5 rounded-2xl bg-white/8 border border-white/10">
@@ -907,7 +903,6 @@
                 </div>
               </div>
 
-              <!-- 3 Progress Bar Makronutrisi -->
               <div class="space-y-2.5">
                 <div>
                   <div class="flex justify-between text-xs font-semibold mb-1">
@@ -943,7 +938,6 @@
           </div>
         </div>
 
-        <!-- Quick-Scan & Smart Meal Recommendation Banner -->
         <div class="rounded-3xl bg-white border border-emerald-200 p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div class="flex items-start gap-3.5">
             <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
@@ -962,9 +956,7 @@
           </button>
         </div>
 
-        <!-- Bento Grid Tengah: Widget Hidrasi Satu Ketukan & Grafik Tren 7 Hari -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Widget Hidrasi Air Putih -->
           <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2.5">
@@ -990,7 +982,6 @@
             </div>
           </div>
 
-          <!-- Grafik Batang Mini Tren 7 Hari -->
           <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-3">
             <div class="flex items-center justify-between">
               <div>
@@ -1000,21 +991,16 @@
               <span id="home-weekly-delta-badge" class="font-num text-xs font-extrabold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">0,00 kg/mgg</span>
             </div>
 
-            <div id="home-7day-bars" class="h-24 flex items-end justify-between gap-2 pt-3 border-b border-slate-100">
-              <!-- Diisi via JS -->
-            </div>
+            <div id="home-7day-bars" class="h-24 flex items-end justify-between gap-2 pt-3 border-b border-slate-100"></div>
           </div>
         </div>
 
-        <!-- Kartu Ringkasan Jurnal Terakhir Hari Ini -->
         <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
             <h2 class="font-extrabold text-sm sm:text-base text-slate-900">Catatan Terakhir Hari Ini</h2>
             <button type="button" onclick="switchDockPage('journal')" class="text-xs font-bold text-emerald-700 hover:underline">Lihat Semua Jurnal →</button>
           </div>
-          <div id="home-recent-meals-list" class="space-y-2">
-            <!-- Diisi via JS -->
-          </div>
+          <div id="home-recent-meals-list" class="space-y-2"></div>
         </div>
       </section>
 
@@ -1037,7 +1023,6 @@
           </div>
         </div>
 
-        <!-- Ringkasan Nutrisi Tanggal Terpilih -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div class="bg-white rounded-2xl p-4 border border-slate-200">
             <span class="text-[11px] text-slate-500 font-semibold block">Total Kalori Makan</span>
@@ -1057,7 +1042,6 @@
           </div>
         </div>
 
-        <!-- Pengelompokan 4 Waktu Makan -->
         <div id="journal-grouped-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
       </section>
 
@@ -1066,7 +1050,6 @@
       <!-- ================================================================= -->
       <section id="page-scanner" class="hidden space-y-5 animate-enter">
         
-        <!-- Switcher Mode: Kamera Gizi AI vs Input Manual Offline -->
         <div class="bg-slate-900 p-1.5 rounded-2xl grid grid-cols-2 gap-1.5 max-w-md mx-auto shadow-md">
           <button id="scanner-subtab-camera" type="button" onclick="switchScannerSubMode('camera')" class="py-2.5 px-4 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 transition">
             <i data-lucide="camera" class="w-4 h-4"></i>
@@ -1119,7 +1102,6 @@
                 <div></div>
               </div>
 
-              <!-- Smart Plate Reticle Ø ~25 cm -->
               <div class="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center p-4">
                 <div class="relative w-60 h-60 sm:w-72 sm:h-72 flex items-center justify-center animate-reticle">
                   <div class="w-full h-full rounded-full border-2 border-dashed border-emerald-400/80 shadow-[0_0_0_9999px_rgba(2,6,23,0.34)]"></div>
@@ -1133,7 +1115,6 @@
                 </div>
               </div>
 
-              <!-- Fallback Kamera -->
               <div id="camera-fallback-overlay" class="hidden absolute inset-0 z-25 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-5">
                 <div class="max-w-md w-full text-center space-y-4">
                   <div class="w-16 h-16 mx-auto rounded-3xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 flex items-center justify-center">
@@ -1165,7 +1146,6 @@
               </div>
             </div>
 
-            <!-- Kontrol Bawah Kamera -->
             <div class="bg-slate-950 border-t border-white/10 px-4 sm:px-8 py-4 flex items-center justify-between gap-3">
               <label for="gallery-photo-input" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white cursor-pointer transition min-w-[72px]">
                 <div class="w-12 h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center">
@@ -1216,14 +1196,13 @@
                 <div class="absolute inset-0 flex items-center justify-center p-4">
                   <div class="bg-slate-900/95 border border-emerald-400/40 px-6 py-5 rounded-3xl shadow-2xl max-w-sm text-center">
                     <div class="w-10 h-10 mx-auto mb-3 rounded-full border-[3px] border-emerald-400 border-t-transparent animate-spin"></div>
-                    <p class="font-extrabold text-sm text-white">Memindai via Gemini 3.8 Flash Proxy...</p>
-                    <p id="laser-status-step" class="text-xs text-emerald-300 mt-1">Mengirim foto terkompresi ke server...</p>
+                    <p class="font-extrabold text-sm text-white">Memindai Nutrisi dengan Gemini AI...</p>
+                    <p id="laser-status-step" class="text-xs text-emerald-300 mt-1">Mengunggah foto terkompresi...</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Kotak Diagnostik Error Pemindaian agar mudah dibaca -->
             <div id="scan-error-banner" class="hidden p-4 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-900 space-y-1.5 leading-relaxed">
               <p class="font-extrabold text-rose-800 flex items-center gap-1.5">
                 <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
@@ -1260,7 +1239,7 @@
               <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
                 <div>
                   <div class="flex items-center gap-2 flex-wrap">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] font-bold">Gemini 3.8 Flash Structured JSON</span>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] font-bold">Gemini 2.5 Flash Structured JSON</span>
                     <span id="ai-res-gi-badge" class="px-2.5 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[11px] font-bold">IG: Sedang</span>
                   </div>
                   <h2 id="ai-res-dish-name" class="font-extrabold text-2xl sm:text-3xl text-white mt-2">Hidangan Terdeteksi</h2>
@@ -1319,7 +1298,6 @@
               </div>
             </div>
 
-            <!-- Koreksi Berat Gramasi Real-Time (-50g / -10g / +10g / +50g + Slider) -->
             <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
@@ -1364,7 +1342,6 @@
               </div>
             </div>
 
-            <!-- Pendapat Ahli Gizi AI -->
             <div class="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200 shadow-sm space-y-4">
               <h3 class="font-extrabold text-base text-slate-900">Pendapat &amp; Saran Ahli Gizi AI Personal</h3>
               <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 space-y-2">
@@ -1490,7 +1467,6 @@
       <!-- ================================================================= -->
       <section id="page-fitness" class="hidden space-y-6 animate-enter">
         
-        <!-- BAGIAN A: KAMERA DETEKSI FOTO BADAN (TIPE TUBUH & % LEMAK) -->
         <div class="bg-slate-950 text-white rounded-3xl p-5 sm:p-6 border border-slate-800 shadow-xl space-y-4">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="space-y-1">
@@ -1510,7 +1486,6 @@
             </div>
           </div>
 
-          <!-- Viewfinder Kamera Body Scan -->
           <div id="bodyscan-camera-box" class="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/10">
             <div class="absolute top-3 inset-x-3 z-20 flex items-center justify-between">
               <span class="px-3 py-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-sky-400/35 text-[11px] font-bold text-sky-300">
@@ -1525,7 +1500,6 @@
             <div class="relative w-full aspect-[3/4] sm:aspect-[16/9] max-h-[460px] bg-slate-950 flex items-center justify-center overflow-hidden">
               <video id="body-camera-video" autoplay playsinline muted class="w-full h-full object-cover"></video>
 
-              <!-- Panduan Postur -->
               <div class="absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center p-4">
                 <div class="w-44 h-72 sm:w-52 sm:h-84 rounded-[44px] border-2 border-dashed border-sky-400/80 shadow-[0_0_0_9999px_rgba(2,6,23,0.38)] flex flex-col items-center justify-between py-3">
                   <span class="px-2.5 py-0.5 rounded-full bg-slate-950/80 text-[10px] font-bold text-sky-300 border border-sky-400/30">Bahu &amp; Kepala</span>
@@ -1536,7 +1510,6 @@
                 </div>
               </div>
 
-              <!-- Fallback Kamera Tubuh -->
               <div id="body-camera-fallback" class="hidden absolute inset-0 z-25 bg-slate-950/95 flex items-center justify-center p-5">
                 <div class="max-w-sm text-center space-y-3">
                   <p class="text-xs text-slate-300">Kamera tubuh belum aktif. Aktifkan kamera atau unggah foto tubuh dari galeri.</p>
@@ -1574,7 +1547,6 @@
             <canvas id="body-capture-canvas" class="hidden"></canvas>
           </div>
 
-          <!-- Hasil Body Scan AI -->
           <div id="bodyscan-result-card" class="hidden bg-white text-slate-800 rounded-2xl p-5 space-y-4 animate-enter">
             <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
               <div class="flex items-center gap-3">
@@ -1590,7 +1562,7 @@
 
             <div id="bodyscan-loading-box" class="hidden p-6 text-center space-y-2">
               <div class="w-9 h-9 mx-auto rounded-full border-[3px] border-sky-500 border-t-transparent animate-spin"></div>
-              <p class="font-extrabold text-sm text-slate-900">Mendeteksi Tipe Tubuh, Massa Otot &amp; % Lemak via Gemini 3.8 Flash...</p>
+              <p class="font-extrabold text-sm text-slate-900">Mendeteksi Tipe Tubuh, Massa Otot &amp; % Lemak dengan Gemini AI...</p>
             </div>
 
             <div id="bodyscan-report-content" class="space-y-3.5">
@@ -1618,7 +1590,6 @@
           </div>
         </div>
 
-        <!-- BAGIAN B: PELACAK AKTIVITAS & OLAHRAGA -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div class="lg:col-span-7 bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
@@ -1667,7 +1638,6 @@
           </div>
         </div>
 
-        <!-- BAGIAN C: SIMULASI PROYEKSI BERAT BADAN 4–12 MINGGU -->
         <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
@@ -1681,9 +1651,7 @@
             Catat asupan makanan dan olahraga Anda untuk melihat kurva prediksi perubahan berat badan 1 hingga 12 minggu ke depan.
           </div>
 
-          <div id="proj-12week-bars" class="grid grid-cols-6 sm:grid-cols-12 gap-2 pt-2 items-end h-36 border-b border-slate-100">
-            <!-- Diisi via JS -->
-          </div>
+          <div id="proj-12week-bars" class="grid grid-cols-6 sm:grid-cols-12 gap-2 pt-2 items-end h-36 border-b border-slate-100"></div>
         </div>
       </section>
 
@@ -1692,7 +1660,6 @@
       <!-- ================================================================= -->
       <section id="page-profile" class="hidden space-y-5 animate-enter">
         
-        <!-- Status Lisensi & Akun Google -->
         <div class="bg-slate-950 text-white rounded-3xl p-5 sm:p-6 border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div class="space-y-1.5">
             <div class="flex items-center gap-2 flex-wrap">
@@ -1718,7 +1685,6 @@
           </div>
         </div>
 
-        <!-- Hasil Integrasi Body Scan AI pada Profil -->
         <div class="bg-sky-50/70 rounded-3xl p-5 border border-sky-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div class="space-y-1">
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-sky-800">Hasil Deteksi Kamera Body Scan AI</span>
@@ -1731,7 +1697,6 @@
           </button>
         </div>
 
-        <!-- Form Biodata Pengguna -->
         <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
           <h2 class="font-extrabold text-base text-slate-900">Biodata &amp; Parameter Metabolisme</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1771,7 +1736,6 @@
           </div>
         </div>
 
-        <!-- 3 Pilihan Tujuan Kalori -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button id="goal-card-lose" type="button" onclick="selectUserGoalMode('lose')" class="text-left p-5 rounded-3xl border-2 border-slate-200 bg-white transition space-y-2">
             <span class="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-[11px] font-extrabold inline-block">Target Defisit (-500 kkal)</span>
@@ -1792,7 +1756,6 @@
           </button>
         </div>
 
-        <!-- Metrik IMT, BMR, TDEE, Target Aktif & Backup JSON -->
         <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center">
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
@@ -1837,19 +1800,16 @@
     <div class="fixed bottom-3 inset-x-0 z-40 px-3 sm:px-6 pointer-events-none">
       <nav aria-label="Navigasi Utama 5 Slot" class="max-w-lg mx-auto pointer-events-auto rounded-3xl bg-slate-950/90 backdrop-blur-xl border border-white/15 px-2 py-2 shadow-2xl shadow-slate-950/50 grid grid-cols-5 items-center gap-1">
         
-        <!-- Slot 1: Beranda -->
         <button id="dock-btn-home" type="button" onclick="switchDockPage('home')" class="flex flex-col items-center justify-center py-2 px-1 rounded-2xl bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px] sm:text-xs transition">
           <i data-lucide="home" class="w-5 h-5 mb-0.5"></i>
           <span>Beranda</span>
         </button>
 
-        <!-- Slot 2: Jurnal -->
         <button id="dock-btn-journal" type="button" onclick="switchDockPage('journal')" class="flex flex-col items-center justify-center py-2 px-1 rounded-2xl text-slate-400 hover:text-white font-semibold text-[10px] sm:text-xs transition">
           <i data-lucide="calendar-days" class="w-5 h-5 mb-0.5"></i>
           <span>Jurnal</span>
         </button>
 
-        <!-- Slot 3 (Tengah): SCAN AI Floating Action Button -->
         <div class="flex flex-col items-center justify-center -mt-7">
           <button id="dock-btn-scanner" type="button" onclick="switchDockPage('scanner')" class="animate-scan-fab w-15 h-15 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-slate-950 border-4 border-slate-950 flex flex-col items-center justify-center shadow-xl transition transform active:scale-90" aria-label="Scan AI">
             <i data-lucide="camera" class="w-6 h-6 stroke-[2.5]"></i>
@@ -1857,13 +1817,11 @@
           <span class="text-[10px] font-extrabold text-emerald-300 mt-1">SCAN AI</span>
         </div>
 
-        <!-- Slot 4: Tubuh & Fit -->
         <button id="dock-btn-fitness" type="button" onclick="switchDockPage('fitness')" class="flex flex-col items-center justify-center py-2 px-1 rounded-2xl text-slate-400 hover:text-white font-semibold text-[10px] sm:text-xs transition">
           <i data-lucide="activity" class="w-5 h-5 mb-0.5"></i>
           <span>Tubuh &amp; Fit</span>
         </button>
 
-        <!-- Slot 5: Profil -->
         <button id="dock-btn-profile" type="button" onclick="switchDockPage('profile')" class="flex flex-col items-center justify-center py-2 px-1 rounded-2xl text-slate-400 hover:text-white font-semibold text-[10px] sm:text-xs transition">
           <i data-lucide="user-cog" class="w-5 h-5 mb-0.5"></i>
           <span>Profil</span>
@@ -1900,7 +1858,6 @@
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-    // Konfigurasi Firebase Web App
     const firebaseConfig = {
       apiKey: "AIzaSyBWpmHyMTaWonUUGKO4r8y-J8TVGkVXT1A",
       authDomain: "nutriscan-ai-acc43.firebaseapp.com",
@@ -1910,7 +1867,6 @@
       appId: "1:916110554189:web:337029767f6fcc23eb9804"
     };
 
-    // Inisialisasi Firebase App, Auth, dan Firestore dengan Persistent Cache Multi-Tab
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
@@ -1922,11 +1878,9 @@
       })
     });
 
-    // Endpoint Backend Proxy Vercel (menyembunyikan GEMINI_API_KEY di server)
     const BACKEND_ANALYZE_ENDPOINT = "/api/analyze";
     const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
 
-    // State Cloud Real-Time (Tersinkronisasi dengan Firestore per akun Google)
     let firebaseUser = null;
     let cloudUserDoc = null;
     let cloudJournalEntries = [];
@@ -1937,7 +1891,6 @@
     let trialWatchdogInterval = null;
     let isMainAppBootstrapped = false;
 
-    // Data Simulasi Menu Contoh pada Live AI Plate Scanner di Beranda Eksplorasi
     const LANDING_SAMPLE_DISHES = [
       {
         emoji: "🍛",
@@ -2020,7 +1973,6 @@
       { id: "id_25", nama: "Whey Protein Isolate", kategori: "Minuman & Suplemen", kalori: 375, protein: 82.0, karbo: 4.5, lemak: 2.5, serat: 0.5 }
     ];
 
-    // State UI
     let landingCalcGender = "male";
     let pendingLandingOnboardingPrefill = null;
     let landingRevealObserver = null;
@@ -2074,7 +2026,6 @@
         }
       });
 
-      // Pemeriksaan berkala tiap 30 detik jika masa uji coba 3 hari habis saat tab terbuka
       trialWatchdogInterval = setInterval(() => {
         if (firebaseUser && cloudUserDoc) {
           if (!hasActiveSubscriptionOrTrial()) {
@@ -2751,7 +2702,7 @@
     }
 
     // =========================================================================
-    // 6. KAMERA GIZI AI & KOMPRESI CANVAS OTOMATIS (MAX 800PX, JPEG 0.75)
+    // 6. KAMERA GIZI AI & KOMPRESI CANVAS OPTIMAL (MAX 640PX, JPEG 0.72)
     // =========================================================================
     async function startLiveCamera(isRetry = false) {
       if (!hasActiveSubscriptionOrTrial()) {
@@ -2817,7 +2768,7 @@
       setTimeout(() => { flashEl.classList.add("hidden"); flashEl.classList.remove("animate-shutter-flash"); }, 350);
 
       const canvas = document.getElementById("photo-capture-canvas");
-      const maxDim = 800;
+      const maxDim = 640;
       let w = videoEl.videoWidth || 1280;
       let h = videoEl.videoHeight || 960;
       if (w > maxDim || h > maxDim) {
@@ -2830,8 +2781,7 @@
       if (cameraFacing === "user") { ctx.translate(w, 0); ctx.scale(-1, 1); }
       ctx.drawImage(videoEl, 0, 0, w, h);
 
-      // Kompresi ke JPEG kualitas 0.75 (~120KB - 240KB, aman untuk Vercel Serverless payload)
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.75);
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.72);
       stopAllCameras();
       processCapturedDataUrlAndStartScan(dataUrl, w, h);
     }
@@ -2847,7 +2797,7 @@
         const img = new Image();
         img.onload = () => {
           const canvas = document.getElementById("photo-capture-canvas");
-          const maxDim = 800;
+          const maxDim = 640;
           let w = img.width, h = img.height;
           if (w > maxDim || h > maxDim) {
             if (w > h) { h = Math.round((h / w) * maxDim); w = maxDim; }
@@ -2857,7 +2807,7 @@
           canvas.height = h;
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           stopAllCameras();
-          processCapturedDataUrlAndStartScan(canvas.toDataURL("image/jpeg", 0.75), w, h);
+          processCapturedDataUrlAndStartScan(canvas.toDataURL("image/jpeg", 0.72), w, h);
         };
         img.src = e.target.result;
       };
@@ -2892,9 +2842,6 @@
       startLiveCamera(false);
     }
 
-    /**
-     * Mengirim gambar makanan yang sudah dikompresi ke Backend Proxy Vercel (/api/analyze)
-     */
     async function analyzeCapturedPhotoWithAI() {
       if (!hasActiveSubscriptionOrTrial()) { routeApplicationEntry(); return; }
       if (!capturedImageBase64 || isScanningAi) return;
@@ -2938,7 +2885,7 @@
 
         if (!result || result.is_food === false || !result.komponen_makanan?.length) {
           document.getElementById("non-food-warning-box").classList.remove("hidden");
-          document.getElementById("non-food-warning-msg").textContent = result?.alasan_bukan_makanan || "Foto tidak menampilkan makanan.";
+          document.getElementById("non-food-warning-msg").textContent = result?.alasan_bukan_makanan || "Foto tidak menampilkan makanan atau minuman yang dapat dikonsumsi.";
           return;
         }
 
@@ -2960,7 +2907,7 @@
         });
 
         renderAiAnalysisPanel();
-        showToast("Pemindaian Gemini 3.8 Flash selesai!", "success");
+        showToast("Pemindaian Gemini 2.5 Flash selesai!", "success");
       } catch (err) {
         isScanningAi = false;
         toggleLaserOverlay(false);
@@ -2976,20 +2923,24 @@
     }
 
     /**
-     * Klien HTTP aman ke Vercel Serverless Proxy (/api/analyze) dengan Exponential Backoff
-     * Membaca teks mentah terlebih dahulu agar respons HTML (misal 404 Vercel) tidak memicu
-     * error Safari "The string did not match the expected pattern."
+     * Klien HTTP cepat ke Vercel Serverless Proxy (/api/analyze)
+     * Dilengkapi batas waktu AbortController (22 detik) agar tidak berputar tanpa batas.
      */
     async function callBackendAnalyzeProxy(requestBody) {
-      const delays = [1000, 2000, 4000];
+      const delays = [800];
 
       for (let attempt = 0; attempt <= delays.length; attempt++) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 22000);
+
         try {
           const res = await fetch(BACKEND_ANALYZE_ENDPOINT, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify(requestBody),
+            signal: controller.signal
           });
+          clearTimeout(timeoutId);
 
           const rawText = await res.text();
           let data = null;
@@ -2999,26 +2950,33 @@
           } catch (parseErr) {
             if (res.status === 404) {
               throw Object.assign(
-                new Error("Endpoint /api/analyze tidak ditemukan (404). Pastikan file api/analyze.js sudah diunggah ke dalam folder 'api/' di repositori GitHub Anda dan proyek sudah di-redeploy di Vercel."),
+                new Error("Endpoint /api/analyze tidak ditemukan (404). Pastikan file api/analyze.js sudah ada di repositori GitHub dan sudah di-redeploy di Vercel."),
+                { fatal: true }
+              );
+            }
+            if (res.status === 504) {
+              throw Object.assign(
+                new Error("Waktu tunggu server Vercel habis (504 Gateway Timeout). Pastikan file api/analyze.js terbaru sudah di-deploy dan koneksi internet stabil."),
                 { fatal: true }
               );
             }
             throw Object.assign(
-              new Error("Server mengembalikan respons non-JSON (Status HTTP " + res.status + "). Periksa log Serverless Function di Vercel atau pastikan halaman diakses melalui domain Vercel (https://)."),
-              { fatal: res.status < 500 }
+              new Error("Server mengembalikan respons non-JSON (Status HTTP " + res.status + ")."),
+              { fatal: true }
             );
           }
 
           if (!res.ok) {
             const errMsg = data?.error || ("HTTP Error " + res.status);
-            if (res.status < 500 || errMsg.includes("GEMINI_API_KEY")) {
-              throw Object.assign(new Error(errMsg), { fatal: true });
-            }
-            throw new Error(errMsg);
+            throw Object.assign(new Error(errMsg), { fatal: true });
           }
 
           return data;
         } catch (err) {
+          clearTimeout(timeoutId);
+          if (err.name === "AbortError") {
+            throw new Error("Koneksi ke server AI melebihi 22 detik. Periksa sinyal internet Anda lalu tekan 'Analisis Ulang Foto Ini'.");
+          }
           if (err.fatal || attempt === delays.length) {
             throw err;
           }
@@ -3033,15 +2991,15 @@
       if (active) {
         overlay.classList.remove("hidden");
         const msgs = [
-          "Mengirim foto terkompresi ke Vercel Proxy...",
-          "Gemini 3.8 Flash mengkalibrasi piring...",
-          "Memisahkan lauk & menghitung gramasi...",
-          "Menyusun JSON terstruktur & saran gizi..."
+          "Mengunggah foto terkompresi...",
+          "Mengidentifikasi komponen makanan...",
+          "Menghitung gramasi & makronutrisi...",
+          "Menyusun saran ahli gizi..."
         ];
         let idx = 0;
         stepEl.textContent = msgs[0];
         clearInterval(laserStepInterval);
-        laserStepInterval = setInterval(() => { idx = (idx + 1) % msgs.length; stepEl.textContent = msgs[idx]; }, 1400);
+        laserStepInterval = setInterval(() => { idx = (idx + 1) % msgs.length; stepEl.textContent = msgs[idx]; }, 950);
       } else {
         clearInterval(laserStepInterval);
         overlay.classList.add("hidden");
@@ -3258,12 +3216,12 @@
         return;
       }
       const canvas = document.getElementById("body-capture-canvas");
-      canvas.width = 600;
-      canvas.height = 800;
+      canvas.width = 480;
+      canvas.height = 640;
       const ctx = canvas.getContext("2d");
-      if (bodyCameraFacing === "user") { ctx.translate(600, 0); ctx.scale(-1, 1); }
-      ctx.drawImage(vid, 0, 0, 600, 800);
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.75);
+      if (bodyCameraFacing === "user") { ctx.translate(480, 0); ctx.scale(-1, 1); }
+      ctx.drawImage(vid, 0, 0, 480, 640);
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.72);
       stopAllCameras();
       analyzeBodyCompositionWithAI(dataUrl);
     }
@@ -3278,7 +3236,7 @@
         const img = new Image();
         img.onload = () => {
           const canvas = document.getElementById("body-capture-canvas");
-          const maxDim = 800;
+          const maxDim = 640;
           let w = img.width, h = img.height;
           if (w > maxDim || h > maxDim) {
             if (w > h) { h = Math.round((h / w) * maxDim); w = maxDim; }
@@ -3288,7 +3246,7 @@
           canvas.height = h;
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           stopAllCameras();
-          analyzeBodyCompositionWithAI(canvas.toDataURL("image/jpeg", 0.75));
+          analyzeBodyCompositionWithAI(canvas.toDataURL("image/jpeg", 0.72));
         };
         img.src = e.target.result;
       };
@@ -3330,7 +3288,6 @@
         document.getElementById("bodyscan-loading-box").classList.add("hidden");
         document.getElementById("bodyscan-report-content").classList.remove("hidden");
 
-        // Auto-Update Profil Pengguna di Cloud Firestore berdasarkan hasil Body Scan AI
         const updatedProfile = getStoredUserProfile();
         const fatPct = Math.round(Number(res.estimasi_lemak_persen) || 18);
         updatedProfile.bodyType = res.tipe_tubuh_somatotype || "Mesomorph / Proporsional";
@@ -4158,7 +4115,6 @@
       return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
-    // Daftarkan seluruh handler ke window agar dapat dipanggil dari atribut onclick/oninput HTML
     Object.assign(window, {
       openGoogleAuthModal,
       closeGoogleAuthModal,
