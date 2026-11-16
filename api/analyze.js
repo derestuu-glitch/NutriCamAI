@@ -1,8 +1,7 @@
 /**
  * Vercel Serverless Function: /api/analyze
  * Proxy aman antara browser (frontend) dan Google Gemini API.
- * Dioptimalkan untuk latensi rendah (2-3 detik) dengan menonaktifkan thinking tokens
- * dan menggunakan model aktif Gemini 2.5 Flash secara langsung tanpa jeda 404.
+ * Menggunakan model terbaru gemini-3.8-flash untuk pemindaian gizi & body scan.
  */
 
 module.exports = async (req, res) => {
@@ -173,26 +172,17 @@ module.exports = async (req, res) => {
       };
     }
 
-    // Gunakan langsung model aktif tercepat dengan thinkingBudget: 0 agar tidak membuang waktu 404/thinking
-    const candidateConfigs = [
-      { model: "gemini-2.5-flash", disableThinking: true },
-      { model: "gemini-2.0-flash", disableThinking: false }
+    // Gunakan model aktif gemini-3.8-flash sesuai standar API terbaru
+    const candidateModels = [
+      "gemini-3.8-flash",
+      "gemini-3-flash",
+      "gemini-2.5-flash"
     ];
 
     let lastStatus = 502;
     let lastErrorMessage = "Gagal memproses permintaan ke Gemini API.";
 
-    for (const cfg of candidateConfigs) {
-      const generationConfig = {
-        temperature: 0.2,
-        responseMimeType: "application/json",
-        responseSchema: responseSchema
-      };
-
-      if (cfg.disableThinking) {
-        generationConfig.thinkingConfig = { thinkingBudget: 0 };
-      }
-
+    for (const modelName of candidateModels) {
       const geminiPayload = {
         systemInstruction: {
           parts: [{ text: systemInstructionText }]
@@ -211,10 +201,14 @@ module.exports = async (req, res) => {
             ]
           }
         ],
-        generationConfig
+        generationConfig: {
+          temperature: 0.2,
+          responseMimeType: "application/json",
+          responseSchema: responseSchema
+        }
       };
 
-      const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${cfg.model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
       const geminiResponse = await fetch(geminiEndpoint, {
         method: "POST",
@@ -234,9 +228,9 @@ module.exports = async (req, res) => {
 
       if (!geminiResponse.ok) {
         lastStatus = geminiResponse.status;
-        lastErrorMessage = geminiData?.error?.message || `Error dari model ${cfg.model}`;
+        lastErrorMessage = geminiData?.error?.message || `Error dari model ${modelName}`;
 
-        if (geminiResponse.status === 404 || geminiResponse.status === 400 || geminiResponse.status >= 500) {
+        if (geminiResponse.status === 404 || geminiResponse.status >= 500) {
           continue;
         }
 
@@ -246,7 +240,7 @@ module.exports = async (req, res) => {
       const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!rawText) {
         lastStatus = 502;
-        lastErrorMessage = `Model ${cfg.model} mengembalikan respons kosong.`;
+        lastErrorMessage = `Model ${modelName} mengembalikan respons kosong.`;
         continue;
       }
 
