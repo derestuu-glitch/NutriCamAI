@@ -261,7 +261,7 @@
           </div>
           <div>
             <div class="flex items-center gap-1.5">
-              <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">NutriCam AI</span>
+              <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">NutriScan AI</span>
               <span class="text-[10px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">PRO</span>
             </div>
             <p class="text-[10px] text-slate-400 hidden sm:block">Biophilic Tech &amp; Spatial Health AI</p>
@@ -299,7 +299,7 @@
           </h1>
 
           <p class="reveal-el reveal-fade-up delay-220 text-sm sm:text-base text-slate-300 leading-relaxed">
-            <strong>NutriCam AI Pro</strong> menghitung berat gramasi dan makronutrisi setiap lauk di piring Anda, memindai <strong>tipe tubuh &amp; persentase lemak visual</strong> melampaui standar BMI biasa, mencatat pembakaran kalori olahraga, dan memproyeksikan <strong>perubahan berat badan mingguan</strong> Anda.
+            <strong>NutriScan AI Pro</strong> menghitung berat gramasi dan makronutrisi setiap lauk di piring Anda, memindai <strong>tipe tubuh &amp; persentase lemak visual</strong> melampaui standar BMI biasa, mencatat pembakaran kalori olahraga, dan memproyeksikan <strong>perubahan berat badan mingguan</strong> Anda.
           </p>
 
           <div class="reveal-el reveal-fade-up delay-340 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
@@ -831,7 +831,7 @@
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-1.5">
-              <span class="font-extrabold text-sm sm:text-base tracking-tight text-white">NutriCam AI</span>
+              <span class="font-extrabold text-sm sm:text-base tracking-tight text-white">NutriScan AI</span>
               <span id="header-license-badge" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30">
                 Trial 3 Hari
               </span>
@@ -2178,8 +2178,8 @@
         const svgText = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="28" fill="#064e3b"/><circle cx="64" cy="64" r="36" fill="none" stroke="#34d399" stroke-width="6"/><circle cx="64" cy="64" r="12" fill="#34d399"/></svg>';
         const svgIcon = encodeURIComponent(svgText);
         const manifestObj = {
-          name: "NutriCam AI Pro",
-          short_name: "NutriCam AI",
+          name: "NutriScan AI Pro",
+          short_name: "NutriScan AI",
           start_url: ".",
           display: "standalone",
           background_color: "#040908",
@@ -2478,7 +2478,7 @@
           paymentMethod: method,
           paidAmountIDR: 149000
         }, { merge: true });
-        showToast("Pembayaran terverifikasi! Lisensi Seumur Hidup NutriCam AI Pro aktif.", "success");
+        showToast("Pembayaran terverifikasi! Lisensi Seumur Hidup NutriScan AI Pro aktif.", "success");
       } catch (err) {
         showToast("Gagal mengaktifkan lisensi Lifetime: " + err.message, "error");
       } finally {
@@ -4059,7 +4059,7 @@
       }, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "NutriCam-Cloud-Backup-" + getTodayIsoDateKey() + ".json";
+      a.download = "NutriScan-Cloud-Backup-" + getTodayIsoDateKey() + ".json";
       a.click();
     }
 
