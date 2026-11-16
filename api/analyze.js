@@ -1,9 +1,9 @@
 /**
  * Vercel Serverless Function: /api/analyze
- * Berfungsi sebagai proxy aman antara browser (frontend) dan Google Gemini 2.5 Flash API.
+ * Berfungsi sebagai proxy aman antara browser (frontend) dan Google Gemini 3.8 Flash API.
  * - Membaca GEMINI_API_KEY dari Vercel Environment Variables (tidak pernah terekspos ke klien).
  * - Menerima gambar terkompresi (Base64) dari frontend.
- * - Memaksa model Gemini 2.5 Flash mengembalikan JSON terstruktur (Structured Outputs).
+ * - Memaksa model Gemini 3.8 Flash mengembalikan JSON terstruktur (Structured Outputs).
  */
 
 module.exports = async (req, res) => {
@@ -193,9 +193,6 @@ module.exports = async (req, res) => {
       };
     }
 
-    // Panggil endpoint resmi Google Gemini 2.5 Flash dengan Structured Output (JSON)
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-
     const geminiPayload = {
       systemInstruction: {
         parts: [{ text: systemInstructionText }]
@@ -221,45 +218,69 @@ module.exports = async (req, res) => {
       }
     };
 
-    const geminiResponse = await fetch(geminiEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(geminiPayload)
-    });
+    // Gunakan model utama gemini-3.8-flash dengan fallback otomatis jika diperlukan
+    const candidateModels = [
+      "gemini-3.8-flash",
+      "gemini-3-flash",
+      "gemini-2.5-flash"
+    ];
 
-    const rawGeminiText = await geminiResponse.text();
-    let geminiData = null;
-    try {
-      geminiData = JSON.parse(rawGeminiText);
-    } catch (e) {
-      return res.status(502).json({
-        error: "Respons dari server Google Gemini tidak berformat JSON."
+    let lastStatus = 502;
+    let lastErrorMessage = "Gagal memproses permintaan ke Gemini API.";
+
+    for (const modelName of candidateModels) {
+      const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+      const geminiResponse = await fetch(geminiEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(geminiPayload)
       });
+
+      const rawGeminiText = await geminiResponse.text();
+      let geminiData = null;
+      try {
+        geminiData = JSON.parse(rawGeminiText);
+      } catch (e) {
+        lastStatus = 502;
+        lastErrorMessage = "Respons dari server Google Gemini tidak berformat JSON.";
+        continue;
+      }
+
+      if (!geminiResponse.ok) {
+        lastStatus = geminiResponse.status;
+        lastErrorMessage = geminiData?.error?.message || `Error dari model ${modelName}`;
+
+        // Jika model tidak tersedia untuk akun ini, coba model berikutnya dalam daftar
+        const isModelUnavailable =
+          geminiResponse.status === 404 ||
+          /no longer available|not found|not supported|deprecated/i.test(lastErrorMessage);
+
+        if (isModelUnavailable) {
+          continue;
+        }
+
+        return res.status(lastStatus).json({ error: lastErrorMessage });
+      }
+
+      const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawText) {
+        lastStatus = 502;
+        lastErrorMessage = `Model ${modelName} mengembalikan respons kosong.`;
+        continue;
+      }
+
+      // Bersihkan pembungkus markdown ```json jika masih ada dan parse ke objek JSON murni
+      const sanitizedJsonText = rawText
+        .replace(/^```json\s*/i, "")
+        .replace(/```\s*$/i, "")
+        .trim();
+
+      const structuredJson = JSON.parse(sanitizedJsonText);
+      return res.status(200).json(structuredJson);
     }
 
-    if (!geminiResponse.ok) {
-      const upstreamMsg = geminiData?.error?.message || "Gagal memproses permintaan ke Gemini 2.5 Flash.";
-      return res.status(geminiResponse.status).json({
-        error: upstreamMsg
-      });
-    }
-
-    const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!rawText) {
-      return res.status(502).json({
-        error: "Model Gemini 2.5 Flash mengembalikan respons kosong."
-      });
-    }
-
-    // Bersihkan pembungkus markdown ```json jika masih ada dan parse ke objek JSON murni
-    const sanitizedJsonText = rawText
-      .replace(/^```json\s*/i, "")
-      .replace(/```\s*$/i, "")
-      .trim();
-
-    const structuredJson = JSON.parse(sanitizedJsonText);
-
-    return res.status(200).json(structuredJson);
+    return res.status(lastStatus).json({ error: lastErrorMessage });
   } catch (error) {
     return res.status(500).json({
       error: "Terjadi kesalahan pada server proxy saat memproses gambar.",
