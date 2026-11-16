@@ -1,13 +1,11 @@
 /**
  * Vercel Serverless Function: /api/analyze
- * Berfungsi sebagai proxy aman antara browser (frontend) dan Google Gemini 3.8 Flash API.
- * - Membaca GEMINI_API_KEY dari Vercel Environment Variables (tidak pernah terekspos ke klien).
- * - Menerima gambar terkompresi (Base64) dari frontend.
- * - Memaksa model Gemini 3.8 Flash mengembalikan JSON terstruktur (Structured Outputs).
+ * Proxy aman antara browser (frontend) dan Google Gemini API.
+ * Dioptimalkan untuk latensi rendah (2-3 detik) dengan menonaktifkan thinking tokens
+ * dan menggunakan model aktif Gemini 2.5 Flash secara langsung tanpa jeda 404.
  */
 
 module.exports = async (req, res) => {
-  // Header CORS standar agar aman diakses dari domain frontend Vercel maupun pengujian lokal
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -16,14 +14,12 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
-  // Hanya izinkan metode HTTP POST
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Metode HTTP tidak diizinkan. Gunakan metode POST."
     });
   }
 
-  // Ambil API Key secara aman dan bersihkan spasi/baris baru tersembunyi
   const apiKey = (process.env.GEMINI_API_KEY || "").trim();
   if (!apiKey) {
     return res.status(500).json({
@@ -40,14 +36,12 @@ module.exports = async (req, res) => {
       userContext = {}
     } = body;
 
-    // Validasi payload gambar Base64
     if (!imageBase64 || typeof imageBase64 !== "string") {
       return res.status(400).json({
         error: "Data gambar terkompresi (imageBase64) tidak ditemukan pada permintaan."
       });
     }
 
-    // Hapus prefix data URL serta whitespace agar string Base64 murni
     const cleanBase64 = imageBase64
       .replace(/^data:image\/[a-zA-Z0-9.+-]+;base64,/, "")
       .replace(/\s+/g, "")
@@ -58,9 +52,6 @@ module.exports = async (req, res) => {
     let responseSchema = null;
 
     if (scanType === "body") {
-      // =====================================================================
-      // MODE 1: PEMINDAIAN KOMPOSISI TUBUH & SOMATOTYPE (BODY SCAN AI)
-      // =====================================================================
       const height = Number(userContext.height) || 170;
       const weight = Number(userContext.weight) || 65;
       const age = Number(userContext.age) || 26;
@@ -68,16 +59,11 @@ module.exports = async (req, res) => {
       const bmiVal = Number(userContext.bmi) || (weight / Math.pow(height / 100, 2));
 
       systemInstructionText =
-        `Anda adalah pelatih kebugaran bersertifikat dan pakar komposisi tubuh AI. ` +
-        `Data biometrik pengguna: Tinggi ${height} cm, Berat ${weight} kg, Umur ${age} tahun, ` +
-        `Jenis Kelamin ${genderLabel}, BMI numerik ${bmiVal.toFixed(1)}. ` +
-        `Analisis foto postur tubuh pengguna dalam Bahasa Indonesia untuk memperkirakan tipe tubuh/somatotype ` +
-        `(Ectomorph, Mesomorph, Endomorph, atau kombinasi), estimasi persentase lemak tubuh (%), ` +
-        `serta status keidealan visual melampaui keterbatasan angka BMI semata.`;
+        `Pakar komposisi tubuh AI. Data pengguna: Tinggi ${height} cm, Berat ${weight} kg, Umur ${age} th, ` +
+        `${genderLabel}, BMI ${bmiVal.toFixed(1)}. Analisis foto tubuh dalam Bahasa Indonesia secara ringkas dan akurat.`;
 
       userPromptText =
-        "Analisis tipe tubuh, estimasi persentase lemak tubuh, perbandingan dengan BMI numerik, " +
-        "saran mode kalori (defisit, normal/TDEE, atau surplus), penjelasan detail, serta rekomendasi latihan dan gizi.";
+        "Tentukan tipe tubuh (somatotype), estimasi % lemak tubuh, perbandingan vs BMI, saran mode kalori (defisit/normal/surplus), penjelasan singkat, dan rekomendasi latihan/gizi.";
 
       responseSchema = {
         type: "OBJECT",
@@ -101,9 +87,6 @@ module.exports = async (req, res) => {
         ]
       };
     } else {
-      // =====================================================================
-      // MODE 2 (DEFAULT): PEMINDAIAN GIZI & GRAMASI MAKANAN
-      // =====================================================================
       const userName = userContext.name || "Pengguna";
       const height = Number(userContext.height) || 170;
       const weight = Number(userContext.weight) || 65;
@@ -113,16 +96,13 @@ module.exports = async (req, res) => {
       const remainingKcal = userContext.remainingKcal !== undefined ? Number(userContext.remainingKcal) : targetCalories;
 
       systemInstructionText =
-        `Anda adalah NutriCam AI Pro, ahli gizi klinis Indonesia. Analisis foto piring makanan atau minuman dalam Bahasa Indonesia. ` +
-        `Identifikasi setiap komponen lauk/makanan secara terpisah, estimasikan berat gramasi tiap komponen dengan acuan diameter piring standar ~25 cm, ` +
-        `berikan nilai nutrisi akurat per 100 gram untuk tiap komponen, skor gizi "Isi Piringku" (1-10), serta evaluasi personal. ` +
-        `Profil pengguna saat ini: Nama ${userName}, Tinggi ${height} cm, Berat ${weight} kg, IMT ${bmi.toFixed(1)}, ` +
-        `Tipe Tubuh ${bodyType}, Target Kalori Harian ${targetCalories} kkal, Sisa Kuota Kalori Hari Ini ${remainingKcal} kkal. ` +
-        `Jika foto bukan makanan atau minuman yang dapat dikonsumsi, set is_food menjadi false dan isi alasan_bukan_makanan.`;
+        `Ahli gizi klinis NutriCam AI. Analisis foto makanan/minuman dalam Bahasa Indonesia secara ringkas. ` +
+        `Pecah tiap komponen makanan, estimasi gramasi (acuan piring ~25 cm), nilai gizi per 100g, skor Isi Piringku (1-10), dan saran singkat. ` +
+        `Profil: ${userName}, ${height}cm, ${weight}kg, IMT ${bmi.toFixed(1)}, Tipe ${bodyType}, Target ${targetCalories} kkal, Sisa ${remainingKcal} kkal. ` +
+        `Jika bukan makanan/minuman, set is_food=false, komponen_makanan=[], dan isi alasan_bukan_makanan.`;
 
       userPromptText =
-        "Pindai hidangan pada foto ini secara teliti, pecah menjadi daftar komponen makanan beserta estimasi berat gramasi " +
-        "dan nilai gizi per 100g, hitung gula (g), natrium (mg), indeks glikemik, skor Isi Piringku, serta berikan pendapat ahli gizi personal.";
+        "Analisis makanan pada foto ini menjadi JSON ringkas dan akurat.";
 
       responseSchema = {
         type: "OBJECT",
@@ -193,43 +173,48 @@ module.exports = async (req, res) => {
       };
     }
 
-    const geminiPayload = {
-      systemInstruction: {
-        parts: [{ text: systemInstructionText }]
-      },
-      contents: [
-        {
-          role: "user",
-          parts: [
-            { text: userPromptText },
-            {
-              inlineData: {
-                mimeType: mimeType || "image/jpeg",
-                data: cleanBase64
-              }
-            }
-          ]
-        }
-      ],
-      generationConfig: {
-        temperature: 0.2,
-        responseMimeType: "application/json",
-        responseSchema: responseSchema
-      }
-    };
-
-    // Gunakan model utama gemini-3.8-flash dengan fallback otomatis jika diperlukan
-    const candidateModels = [
-      "gemini-3.8-flash",
-      "gemini-3-flash",
-      "gemini-2.5-flash"
+    // Gunakan langsung model aktif tercepat dengan thinkingBudget: 0 agar tidak membuang waktu 404/thinking
+    const candidateConfigs = [
+      { model: "gemini-2.5-flash", disableThinking: true },
+      { model: "gemini-2.0-flash", disableThinking: false }
     ];
 
     let lastStatus = 502;
     let lastErrorMessage = "Gagal memproses permintaan ke Gemini API.";
 
-    for (const modelName of candidateModels) {
-      const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(apiKey)}`;
+    for (const cfg of candidateConfigs) {
+      const generationConfig = {
+        temperature: 0.2,
+        responseMimeType: "application/json",
+        responseSchema: responseSchema
+      };
+
+      if (cfg.disableThinking) {
+        generationConfig.thinkingConfig = { thinkingBudget: 0 };
+      }
+
+      const geminiPayload = {
+        systemInstruction: {
+          parts: [{ text: systemInstructionText }]
+        },
+        contents: [
+          {
+            role: "user",
+            parts: [
+              { text: userPromptText },
+              {
+                inlineData: {
+                  mimeType: mimeType || "image/jpeg",
+                  data: cleanBase64
+                }
+              }
+            ]
+          }
+        ],
+        generationConfig
+      };
+
+      const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${cfg.model}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
       const geminiResponse = await fetch(geminiEndpoint, {
         method: "POST",
@@ -249,14 +234,9 @@ module.exports = async (req, res) => {
 
       if (!geminiResponse.ok) {
         lastStatus = geminiResponse.status;
-        lastErrorMessage = geminiData?.error?.message || `Error dari model ${modelName}`;
+        lastErrorMessage = geminiData?.error?.message || `Error dari model ${cfg.model}`;
 
-        // Jika model tidak tersedia untuk akun ini, coba model berikutnya dalam daftar
-        const isModelUnavailable =
-          geminiResponse.status === 404 ||
-          /no longer available|not found|not supported|deprecated/i.test(lastErrorMessage);
-
-        if (isModelUnavailable) {
+        if (geminiResponse.status === 404 || geminiResponse.status === 400 || geminiResponse.status >= 500) {
           continue;
         }
 
@@ -266,11 +246,10 @@ module.exports = async (req, res) => {
       const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!rawText) {
         lastStatus = 502;
-        lastErrorMessage = `Model ${modelName} mengembalikan respons kosong.`;
+        lastErrorMessage = `Model ${cfg.model} mengembalikan respons kosong.`;
         continue;
       }
 
-      // Bersihkan pembungkus markdown ```json jika masih ada dan parse ke objek JSON murni
       const sanitizedJsonText = rawText
         .replace(/^```json\s*/i, "")
         .replace(/```\s*$/i, "")
